@@ -1,7 +1,4 @@
 <?php
-// spl_autoload_register(function ($class) {
-//     include "../models/" . $class . ".php";
-// });
 
 class CommentController
 {
@@ -16,6 +13,27 @@ class CommentController
     {
         $c = new Comment();
         $res = $c->newComment($userId, $postId, $description, $mediaUrl);
+        return $res;
+    }
+
+    public function loadCommentsbyCommentId($commentId)
+    {
+        $c = new Comment();
+        $res = $c->loadCommentsbyCommentId($commentId);
+        return $res;
+    }
+
+    public function editComment($commentId, $description)
+    {
+        $p = new Comment();
+        $res = $p->editComment($commentId, $description);
+        return $res;
+    }
+
+    public function deleteComment($commentId)
+    {
+        $p = new Comment();
+        $res = $p->deleteComment($commentId);
         return $res;
     }
 }
