@@ -2,7 +2,7 @@
 require("constants.php");
 class DbConn
 {
-
+    // Generalize functions for Database queries
     private $charset = "utf8";
     public $dbConn;
 

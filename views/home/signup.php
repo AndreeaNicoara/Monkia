@@ -1,6 +1,7 @@
 <?php
 require_once('../../bootstrapping.php');
 
+// Check if user submits a form
 if (isset($_POST['submit'])) {
   $username = validate_data($_POST['username']);
   $email = validate_data($_POST['email']);

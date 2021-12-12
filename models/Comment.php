@@ -3,16 +3,17 @@
 
 require_once('DbConn.php');
 
+// Initializing the model Comment
 class Comment
 {
-
+    // Initializing the functions for model Comment
     public function loadCommentsbyPostId($postId)
     {
         try {
 
             $result = false;
             $db = new Dbconn();
-            $sql = 'SELECT c.comment_id, c.description, c.user_id, u.username, u.avatar, c.media_url, c.up_votes, c.down_votes
+            $sql = 'SELECT c.comment_id, c.description, c.user_id, u.username, u.avatar, c.media_url, c.up_votes, c.down_votes, c.post_id 
                 FROM `comment` c 
                 INNER JOIN post p ON c.post_id = p.post_id
                 INNER JOIN `user` u ON u.user_id = c.user_id
@@ -40,5 +41,44 @@ class Comment
         } catch (\PDOException $ex) {
             print($ex->getMessage());
         }
+    }
+
+    public function loadCommentsbyCommentId($commentId)
+    {
+        try {
+
+            $result = false;
+            $db = new Dbconn();
+            $sql = 'SELECT c.comment_id, c.description 
+                FROM `comment` c 
+                WHERE c.comment_id = ? ORDER BY c.`datetime` DESC';
+            $result = $db->selectQueryBind($sql, $commentId);
+            return $result;
+        } catch (\PDOException $ex) {
+            print($ex->getMessage());
+        }
+    }
+
+    public function editComment($commentId, $description)
+    {
+        $db = new DbConn();
+        $date = date('Y-m-d H:i:s');
+        $sql = 'UPDATE comment set description=? WHERE comment_id=?';
+        // VALUES ( :userId, :title, :categoryName, :mediaUrl, :descriptionInfo, :postdate, :upvote, :downvote)';
+        // VALUES ($userId, '$title', '$categoryName', '$mediaUrl', '$description', '$date', 0, 0)';
+        $arr = [$description, $commentId];
+
+        $result = $db->executeQueryBindArr($sql, $arr);
+        return $result;
+    }
+
+    public function deleteComment($commentId)
+    {
+        $db = new DbConn();
+        $date = date('Y-m-d H:i:s');
+        $sql = 'DELETE FROM comment WHERE comment_id=?';
+        $arr = [$commentId];
+        $result = $db->executeQueryBindArr($sql, $arr);
+        return $result;
     }
 }

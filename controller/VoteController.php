@@ -6,9 +6,10 @@ spl_autoload_register(function ($class) {
     }
 });
 
+// Initializing Controller
 class VoteController
 {
-
+    //Defining functions for vote screen
     public function ratePost($userId, $postId, $newVote)
     {
         $v = new Vote();

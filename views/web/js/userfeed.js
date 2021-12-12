@@ -120,6 +120,18 @@ $(document).ready(function() {
             }
         }
     };
-
-
+    editPostId = function(id){
+        loadContent('edit_post',id);
+    };
+    deletePostId = function(id){
+        $.ajax({
+            url: "controller/ViewsController.php",
+            method: "POST",
+            data: { option:"delete_post", postId:id}
+        })
+        .done(function(data) {
+            alert('Post has been deleted');
+            loadPosts('latest',userId);
+        });
+    };
 });

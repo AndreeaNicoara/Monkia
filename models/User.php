@@ -9,6 +9,8 @@ class User
     private $avatar;
     private $password;
     private $rank;
+    private $role_name;
+    private $active_user;
     public $userCategories = array();
     public $message = array(
         "id" => "",
@@ -21,7 +23,7 @@ class User
         $db = new Dbconn();
         $result = false;
         if ($db->isConnected()) {
-            $sql = "SELECT `user_id`, username, email,`password`, avatar, `rank`
+            $sql = "SELECT `user_id`, username, email,`password`, avatar, `rank`, role_name 
                     from user where `user_id` = ?";
             $stmt = $db->selectQueryBind($sql, $userId);
             if ($stmt) {
@@ -31,6 +33,7 @@ class User
                     $this->email = $values['email'];
                     $this->password = $values['password'];
                     $this->avatar = $values['avatar'];
+                    $this->role_name = $values['role_name'];
                     $this->rank = $values['rank'];
                 }
             }
@@ -72,6 +75,10 @@ class User
     public function getUserAvatar()
     {
         return $this->avatar;
+    }
+    public function getUserRolename()
+    {
+        return $this->role_name;
     }
     public function getUserRank()
     {
@@ -120,6 +127,12 @@ class User
     {
         $this->email = $email;
         $this->updateUserInfo('email', $email);
+    }
+
+     public function setActiveUser($status)
+    {
+        $this->active_user = $status;
+        $this->updateUserInfo('active_user', $status);
     }
 
     // Methods
@@ -235,5 +248,34 @@ class User
             $result = $db->executeQueryBind($sql, $data);
         }
         return $result; 
+    }
+
+    public function updateUserStatus ($user_id,$active_user) {
+        $db = new Dbconn();
+        $result = false;
+        $data;
+        if ($db->isConnected()) {
+            $sql = "UPDATE user 
+                    SET active_user  = ?
+                    WHERE user_id = $user_id";
+            $result = $db->executeQueryBind($sql, $active_user);
+        }
+        return $result; 
+    }
+
+    public function getAllUsers()
+    {
+        try {
+
+            $result = false;
+            $db = new Dbconn();
+            $sql = 'SELECT `user_id`, username, email, role_name, active_user 
+                FROM `user` c 
+                ORDER BY user_id DESC';
+            $result = $db->selectQuery($sql);
+            return $result;
+        } catch (\PDOException $ex) {
+            print($ex->getMessage());
+        }
     }
 }

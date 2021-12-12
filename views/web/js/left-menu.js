@@ -4,5 +4,11 @@ $(document).ready(function() {
         loadContent('category_posts',categoryName);
     }
 
+    loadUsersList = function(){
+        loadContent('users_list');
+    }
 
+    loadAboutList = function(){
+        loadContent('about_list');
+    }
 });

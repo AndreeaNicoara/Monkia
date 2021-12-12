@@ -1,8 +1,10 @@
 <?php
+// Session Handling
 $session = new SessionHandle();
 if ($session->confirm_logged_in()) {
     $redirect = new Redirector("views/home/login.php");
 }
+// Get user info
 $u = new UserController();
 $userData = $u->getUserInfo();
 
@@ -88,14 +90,16 @@ $comments = $c->loadCommentsbyPostId($post_id);
                                 <form id="comment-form">
                                     <div class="my-2">
                                         <label for="exampleFormControlTextarea1">Write a comment</label>
-                                        <textarea class="form-control" id="description" rows="3"></textarea>
+                                        <textarea class="form-control comment_<?php echo $post_id ?>" id="description" rows="3"></textarea>
                                     </div>
                                     <div class="my-2">
                                         <label for="exampleFormControlFile1">Upload image</label>
                                         <input type="file" class="form-control-file" id="imageupload">
                                     </div>
                                     <div class="my-2">
-                                        <button type="button" id="comment-submit" class="btn btn-primary" onclick="submitNewComment(<?php echo (int)$userData['userId'] ?>,<?php echo $post_id ?>)">Submit</button>
+                                        <button type="button" id="comment-submit" class="btn btn-primary submit_<?php echo $post_id ?>" onclick="submitNewComment(<?php echo (int)$userData['userId'] ?>,<?php echo $post_id ?>)">Submit</button>
+
+                                        <button style="display: none;" type="button" id="comment-update" class="btn btn-primary update_<?php echo $post_id ?>">Update</button>
                                     </div>
                                 </form>
                             </div>
@@ -114,6 +118,12 @@ $comments = $c->loadCommentsbyPostId($post_id);
                                     <span class="comment-username"><?php echo $comment['username']; ?></span>
                                     <p class="mb-0"><?php echo $comment['description']; ?></p>
                                 </div>
+                                <p class="post_subtitle">
+                                    <a class="text-decoration-none dynamic-content custom-link-text" onclick="editComment(<?php echo $comment['comment_id'] ?>,<?php echo $comment['post_id'] ?>)">Edit</a>
+                                </p>
+                                <p class="post_subtitle">
+                                    <a class="text-decoration-none dynamic-content custom-link-text" onclick="deleteComment(<?php echo $comment['comment_id'] ?>)">Delete</a>
+                                </p>
                             </div>
                         </div>
                     <?php }; ?>

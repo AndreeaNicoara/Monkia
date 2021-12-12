@@ -2,6 +2,7 @@
 
 require_once('../../bootstrapping.php');
 $c = new CategoryController();
+// Load all categories
 $categories = $c->loadCategories();
 $userId = $_SESSION['userId'];
 

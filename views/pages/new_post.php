@@ -1,5 +1,6 @@
 <?php
 
+// Load all categories
 $c = new CategoryController();
 $categories = $c->loadCategories();
 

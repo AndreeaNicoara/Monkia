@@ -88,6 +88,10 @@ $(document).ready(function () {
       });
   };
 
+  function updateUser() {
+    alert();
+  }
+
   function resetErrorMessages() {
     $("#email-error").text("");
     $("#avatar-error").text("");

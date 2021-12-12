@@ -1,9 +1,11 @@
 <?php
 require_once('DbConn.php');
 require_once('User.php');
+
+// Initializing the model Category
 class Category
 {
-    //loadUserCategories not implemented yet
+    // Initializing the functions for model Category
     public function loadCategories()
     {
         try {

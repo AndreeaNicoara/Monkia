@@ -89,6 +89,39 @@ if (isset($_POST["option"])) {
 
             echo json_encode($data);
             break;
+
+        case "edit_post_form":
+
+            $errors = [];
+            $data = [];
+
+            if (empty($_POST["title"])) {
+                $errors['title'] = 'New post must have a title';
+            }
+            if (empty($_POST["description"])) {
+                $errors['description'] = 'Select the description of your post';
+            }
+
+            // If inputs arent empty and user has chosen a category
+            if (empty($errors)) {
+                $userid = $_POST["userId"];
+                $title = $_POST["title"];
+                $description = $_POST["description"];
+
+                $p = new PostController();
+                $p->editPost($userid, $title, $description);
+            }
+
+            if (!empty($errors)) {
+                $data['success'] = false;
+                $data['errors'] = $errors;
+            } else {
+                $data['success'] = true;
+                $data['message'] = 'Success!';
+            }
+
+            echo json_encode($data);
+            break;
         
         case "profile_form":
             $errors = [];
@@ -253,6 +286,72 @@ if (isset($_POST["option"])) {
             $c = new CategoryController();
             $result = $c->registerUserCategories($userId, $categories);
             echo $result;
+            break;
+        case "delete_post":
+            $postId = $_POST["postId"];
+            $p = new PostController();
+            $posts2 = $p->deletePost($postId);
+            echo json_encode($posts2);
+            break;
+        // Show post comments
+        case "show_post_comment":
+            $commentId = $_POST["commentId"];
+            $p = new CommentController();
+            $posts2 = $p->loadCommentsbyCommentId($commentId);
+            echo json_encode($posts2);
+            break;
+
+        // Edit post comments
+        case "edit_post_comment":
+            $formData = $_POST["formData"];
+            if ($formData["formtype"]) {
+                $form = $_POST["formtype"];
+                $errors = [];
+                $data = [];
+                $commentId = $_POST["commentId"];
+                if (empty($formData['description'])) {
+                    $errors['message'] = 'Type something to update a comment';
+                } else {
+                    // Message and image validation
+                    $c = new CommentController();
+                    $result = $c->editComment($commentId, $formData['description']);
+                }
+
+                if (!empty($errors)) {
+                    $data['sucess'] = false;
+                    $data['errors'] = $errors;
+                } else {
+                    $data['sucess'] = true;
+                    $data['errors'] = 'Success';
+                }
+                echo json_encode($result);
+            }
+            break;
+
+        // Delete a comment
+        case "delete_comment":
+            $commentId = $_POST["commentId"];
+            $p = new CommentController();
+            $posts2 = $p->deleteComment($commentId);
+            echo json_encode($posts2);
+            break;
+
+        // Update user information
+        case "update_user":
+            $user_id = $_POST["user_id"];
+            $active_user = $_POST["active_user"];
+            $p = new UserController();
+            $posts2 = $p->updateUserInfo($user_id, $active_user);
+            echo json_encode($posts2);
+            break;
+
+        // Update about us
+        case "update_about":
+            $about_id = $_POST["about_id"];
+            $description = $_POST["description"];
+            $p = new AboutController();
+            $posts2 = $p->updateAbout($about_id, $description);
+            echo json_encode($posts2);
             break;
     }
 }

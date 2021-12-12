@@ -6,10 +6,12 @@ spl_autoload_register(function ($class) {
     }
 });
 
+// Initializing Controller
 class UserController
 {
     public $msg;
 
+    // Function to Register User
     public function registerUser($username, $email, $password, $avatar)
     {
         $u = new User($username, $email, $password);
@@ -18,6 +20,7 @@ class UserController
         return $res; // If user is successfully created, returns their user Id
     }
 
+    // Function to get User info
     public function getUserInfo()
     {
         $u = new User($_SESSION['userId']);
@@ -26,10 +29,12 @@ class UserController
             'username' => $u->getUsername(),
             'avatar' => $u->getUserAvatar(),
             'email' => $u->getUserEmail(),
-            'rank' => $u->getUserRank()
+            'rank' => $u->getUserRank(),
+            'role_name' => $u->getUserRolename()
         ];
         return $data;
     }
+    // Function to get user password
     public function getUserPassword()
     {
         $u = new User($_SESSION['userId']);
@@ -41,5 +46,21 @@ class UserController
     public function setUser(){
         $u = new User($_SESSION['userId']);
         return $u;
+    }
+
+    // Function to get all users
+    public function getAllUsers()
+    {
+        $u = new User($_SESSION['userId']);
+        $data = $u->getAllUsers();
+        return $data;
+    }
+
+    // Function to update user info
+    public function updateUserInfo($user_id, $active_user)
+    {
+        $u = new User($_SESSION['userId']);
+        $data = $u->updateUserStatus($user_id, $active_user);
+        return $data;
     }
 }

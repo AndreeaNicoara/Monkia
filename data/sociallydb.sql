@@ -21,6 +21,7 @@ CREATE TABLE `user` (
   email VARCHAR(255) NOT NULL,
   `rank` VARCHAR (255),
   role_name VARCHAR (100) NOT NULL,
+  active_user ENUM('Active','Non-Active') DEFAULT 'Active' NOT NULL,
   FOREIGN KEY (role_name) REFERENCES `role` (role_name)
 )ENGINE = InnoDB;
 
@@ -107,7 +108,12 @@ CREATE TABLE user_message(
   FOREIGN KEY (media_id) REFERENCES media (media_id)
 )ENGINE = InnoDB;
 
-
+CREATE TABLE about_website 
+  ( `about_id` INT(11) NOT NULL AUTO_INCREMENT, 
+    `description` TEXT, 
+    `date_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP, 
+    PRIMARY KEY (`about_id`) 
+   )  ENGINE=INNODB;
 /* Data insertion */
 
 /* Role */

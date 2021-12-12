@@ -10,6 +10,12 @@
                 </p>
                 <span>Posted by <b><?php echo $post['username'] ?></b></span>
             </div>
+            <p class="post_subtitle">
+                <a class="text-decoration-none dynamic-content custom-link-text" onclick="editPostId(<?php echo $post['post_id'] ?>)">Edit</a>
+            </p>
+            <p class="post_subtitle">
+                <a class="text-decoration-none dynamic-content custom-link-text" onclick="deletePostId(<?php echo $post['post_id'] ?>)">Delete</a>
+            </p>
         </div>
         <div class="post_description">
             <p class="post_subtitle">

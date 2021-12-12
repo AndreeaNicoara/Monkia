@@ -4,6 +4,7 @@
 
 class LoginController
 {
+	// Function to Login User
     public function loginUser($username, $password)
     {
         $u = new UserLogin();

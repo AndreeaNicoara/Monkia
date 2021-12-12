@@ -9,9 +9,11 @@ spl_autoload_register(function ($class) {
 //     include "../models/" . $class . ".php";
 // });
 // include "bootstrapping.php";
+
+// Initializing Controller
 class PostController
 {
-
+    // Defining functions for Posts
     public function loadUserFeedPostsFiltered($userId, $filter)
     {
         $p = new Post();
@@ -36,6 +38,19 @@ class PostController
     {
         $p = new Post();
         $res = $p->newPost($userId, $title, $categoryName, $mediaUrl, $description);
+        return $res;
+    }
+
+    public function editPost($userId, $title, $description)
+    {
+        $p = new Post();
+        $res = $p->editPost($userId, $title, $description);
+        return $res;
+    }
+    public function deletePost($postId)
+    {
+        $p = new Post();
+        $res = $p->deletePost($postId);
         return $res;
     }
 }

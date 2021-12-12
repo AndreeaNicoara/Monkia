@@ -2,12 +2,10 @@
 
 require_once('DbConn.php');
 
+// Initializing the model Post
 class Post
 {
-
-
-
-
+  // Initializing the functions for model Post
   public function loadUserFeedPostsFiltered($userId, $filter)
   {
     // Filter: latest, popular, oldest, unpopular
@@ -70,6 +68,33 @@ class Post
     // VALUES ($userId, '$title', '$categoryName', '$mediaUrl', '$description', '$date', 0, 0)';
     $arr = [$userId, $title, $categoryName, $mediaUrl, $description, $date];
 
+    $result = $db->executeQueryBindArr($sql, $arr);
+    return $result;
+  }
+
+  public function editPost($userId, $title, $description)
+  {
+    $db = new DbConn();
+    $date = date('Y-m-d H:i:s');
+    $sql = 'UPDATE post set title=?, description=? WHERE post_id=?';
+    // VALUES ( :userId, :title, :categoryName, :mediaUrl, :descriptionInfo, :postdate, :upvote, :downvote)';
+    // VALUES ($userId, '$title', '$categoryName', '$mediaUrl', '$description', '$date', 0, 0)';
+    $arr = [$title, $description, $userId];
+
+    $result = $db->executeQueryBindArr($sql, $arr);
+    return $result;
+  }
+
+  public function deletePost($postId)
+  {
+    $db = new DbConn();
+    $date = date('Y-m-d H:i:s');
+    $sql = 'DELETE FROM comment WHERE post_id=?';
+    $arr = [$postId];
+    $result = $db->executeQueryBindArr($sql, $arr);
+
+    $sql = 'DELETE FROM post WHERE post_id=?';
+    $arr = [$postId];
     $result = $db->executeQueryBindArr($sql, $arr);
     return $result;
   }

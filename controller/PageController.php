@@ -16,6 +16,9 @@ if (isset($_POST["pageName"])) {
         case 'new_post':
             include_once('../views/pages/new_post.php');
             break;
+        case 'edit_post':
+            include_once('../views/pages/edit_post.php');
+            break;
         case 'show_post':
             include_once('../views/pages/show_post.php');
             break;
@@ -27,6 +30,12 @@ if (isset($_POST["pageName"])) {
             break;
         case 'category_posts':
             include_once('../views/pages/category_posts.php');
+            break;
+        case 'users_list':
+            include_once('../views/pages/users_list.php');
+            break;
+        case 'about_list':
+            include_once('../views/pages/about_list.php');
             break;
         default:
             $content = '<h1> This is what you came for' . $pageId . ' </h1>';

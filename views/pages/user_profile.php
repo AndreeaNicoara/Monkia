@@ -1,4 +1,6 @@
 <?php 
+
+// Get user info
 $u = new UserController();
 $userData = $u->getUserInfo();
 ?>

@@ -2,9 +2,10 @@
 
 require_once('DbConn.php');
 
+// Initializing the model Vote
 class Vote
 {
-
+     // Initializing the functions for model Vote
     public function isPostPreviouslyRated($user_id, $post_id)
     {
         try {
