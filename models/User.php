@@ -11,6 +11,8 @@ class User
     private $rank;
     private $role_name;
     private $active_user;
+    private $name;
+    private $dob;
     public $userCategories = array();
     public $message = array(
         "id" => "",
@@ -23,7 +25,7 @@ class User
         $db = new Dbconn();
         $result = false;
         if ($db->isConnected()) {
-            $sql = "SELECT `user_id`, username, email,`password`, avatar, `rank`, role_name 
+            $sql = "SELECT `user_id`, username, email,`password`, avatar, `rank`, role_name, `name`, dob  
                     from user where `user_id` = ?";
             $stmt = $db->selectQueryBind($sql, $userId);
             if ($stmt) {
@@ -35,6 +37,8 @@ class User
                     $this->avatar = $values['avatar'];
                     $this->role_name = $values['role_name'];
                     $this->rank = $values['rank'];
+                    $this->name = $values['name'];
+                    $this->dob = $values['dob'];
                 }
             }
             $sql = "SELECT c.category_name, c.icon
@@ -84,7 +88,14 @@ class User
     {
         return $this->rank;
     }
-
+    public function getName()
+    {
+        return $this->name;
+    }
+    public function getUserDob()
+    {
+        return $this->dob;
+    }
     public function getUserEmail()
     {
         return $this->email;
@@ -191,7 +202,7 @@ class User
         }
     }
 
-    public function registerUser($username, $email, $password, $avatar)
+    public function registerUser($username, $email, $password, $avatar, $name, $dob)
     {
         try {
             $db = new Dbconn();
@@ -205,9 +216,9 @@ class User
                     $this->message["id"] = "email";
                     $this->message["text"] = "This email is currently being used by another user.";
                 } else {
-                    $sql = 'INSERT INTO `user` (`username`, avatar, `password`, email, `rank`, role_name) 
-                    VALUES (?, ?, ?, ?, ?, ?)';
-                    $arr = [$username, $avatar, $password, $email, 'Beginner', 'registeredUser'];
+                    $sql = 'INSERT INTO `user` (`username`, avatar, `password`, email, `rank`, role_name, name, dob) 
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+                    $arr = [$username, $avatar, $password, $email, 'Beginner', 'registeredUser', $name, $dob];
                     $result = $db->executeQueryBindArr($sql, $arr);
                     // If the user is succesfully created, we retrieve the user Id when inserted
                     if ($result) $result = $db->dbConn->lastInsertId();

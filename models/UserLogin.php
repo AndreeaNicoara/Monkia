@@ -22,7 +22,7 @@ class UserLogin
         $result = $db->selectQueryBind($sql, $user);
         // User exists
         if (count($result) == 1) {
-            if ($result[0]['password'] == $pass) {
+            if ($result[0]['password'] == md5($pass)) {
                 if ($result[0]['active_user'] == 'Active') {
                     $_SESSION['userId'] = $result[0]['user_id'];
                     $_SESSION['username'] = $result[0]['username'];

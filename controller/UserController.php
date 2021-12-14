@@ -12,10 +12,10 @@ class UserController
     public $msg;
 
     // Function to Register User
-    public function registerUser($username, $email, $password, $avatar)
+    public function registerUser($username, $email, $password, $avatar, $name, $dob)
     {
         $u = new User($username, $email, $password);
-        $res = $u->registerUser($username, $email, $password, $avatar);
+        $res = $u->registerUser($username, $email, $password, $avatar, $name, $dob);
         $this->msg = $u->message;
         return $res; // If user is successfully created, returns their user Id
     }
@@ -30,7 +30,9 @@ class UserController
             'avatar' => $u->getUserAvatar(),
             'email' => $u->getUserEmail(),
             'rank' => $u->getUserRank(),
-            'role_name' => $u->getUserRolename()
+            'role_name' => $u->getUserRolename(),
+            'name' => $u->getName(),
+            'dob' => $u->getUserDob()
         ];
         return $data;
     }

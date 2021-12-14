@@ -15,6 +15,7 @@ CREATE TABLE `tag` (
 
 CREATE TABLE `user` (
 	`user_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `name` VARCHAR(100) NULL,
   username VARCHAR(100) NOT NULL,
   avatar VARCHAR(255) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
@@ -22,6 +23,7 @@ CREATE TABLE `user` (
   `rank` VARCHAR (255),
   role_name VARCHAR (100) NOT NULL,
   active_user ENUM('Active','Non-Active') DEFAULT 'Active' NOT NULL,
+  `dob` DATE NULL,
   FOREIGN KEY (role_name) REFERENCES `role` (role_name)
 )ENGINE = InnoDB;
 

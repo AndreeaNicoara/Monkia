@@ -44,6 +44,16 @@ $userData = $u->getUserInfo();
                           <div class="row">
                             <div class="col">
                               <div class="form-group">
+                                <label>Name</label>
+                                <input class="form-control" type="text" name="name" id="name-profile" placeholder="<?php echo $userData['name'] ?>" disabled>
+                                <span class="msg error-message my-2" id="name-error">
+                              </div>
+                            </div>
+                          </div>
+                          <hr>
+                          <div class="row">
+                            <div class="col">
+                              <div class="form-group">
                                 <label>Email</label>
                                 <input class="form-control" type="text" name="email" id="email-profile" placeholder="<?php echo $userData['email'] ?>">
                                 <span class="msg error-message my-2" id="email-error">
@@ -76,6 +86,16 @@ $userData = $u->getUserInfo();
                                 <label>Current Password</label>
                                 <input class="form-control" type="password" name="password" id="password-profile" placeholder="••••••">
                                 <span class="msg error-message my-2" id="password-error">
+                              </div>
+                            </div>
+                          </div>
+                          <hr>
+                          <div class="row">
+                            <div class="col">
+                              <div class="form-group">
+                                <label>DOB</label>
+                                <input class="form-control" type="text" name="dob" id="dob-profile" placeholder="<?php echo $userData['dob'] ?>" disabled>
+                                <span class="msg error-message my-2" id="dob-error">
                               </div>
                             </div>
                           </div>

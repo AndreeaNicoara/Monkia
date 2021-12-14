@@ -3,12 +3,15 @@ require_once('../../bootstrapping.php');
 
 // Check if user submits a form
 if (isset($_POST['submit'])) {
+  $name = validate_data($_POST['name']);
   $username = validate_data($_POST['username']);
   $email = validate_data($_POST['email']);
+  $dob = validate_data($_POST['dob']);
   $password = validate_data($_POST['password']);
+  $password = md5($password);
   $avatar = generate_rnd_avatar();
   $c = new UserController();
-  $newUserId = $c->registerUser($username, $email, $password, $avatar);
+  $newUserId = $c->registerUser($username, $email, $password, $avatar, $name, $dob);
   $msg = $c->msg;
   if ($newUserId) { // User succesfully created 
     $_SESSION['userId'] = $newUserId;
@@ -52,6 +55,7 @@ function generate_rnd_avatar()
   <link rel="stylesheet" href="../web/css/messages-styles.css" />
   <!-- jQuery -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
 </head>
 
 <body id="signup">
@@ -62,6 +66,11 @@ function generate_rnd_avatar()
 
         <h1>Sign Up</h1>
         <form action="" method="post" onsubmit="return validate();">
+          <!-- NAME -->
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" autocomplete="off" />
+          </div>
           <!-- USERNAME -->
           <div class="form-group">
             <label for="username">Username</label>
@@ -85,6 +94,11 @@ function generate_rnd_avatar()
               echo $msg["text"];
             } ?>
           </span>
+          <!-- DOB -->
+          <div class="form-group">
+            <label for="dob">Date of Birth</label>
+            <input type="text" name="dob" id="dob" autocomplete="off" />
+          </div>
           <!-- PASSWORD -->
           <div class="form-group" id="password-parent">
             <label for="password">Password</label>
@@ -124,6 +138,12 @@ function generate_rnd_avatar()
   <!-- Validation -->
   <script type="text/javascript" src="../web/js/utils.js"></script>
   <script type="text/javascript" src="../web/js/signup.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
 </body>
 
 </html>
+<script>
+  $( function() {
+    $( "#dob" ).datepicker({ dateFormat: 'yy-mm-dd', maxDate: '0' });
+  } );
+</script>

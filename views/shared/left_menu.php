@@ -1,4 +1,4 @@
-  <ul id="left-menu_categories">
+<ul id="left-menu_categories">
     <li>My Categories</li>
     <?php
     $c = new CategoryController();
