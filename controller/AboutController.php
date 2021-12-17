@@ -19,7 +19,7 @@ class AboutController
         return $data;
     }
 
-    // Function to update about
+    // Function to update About
     public function updateAbout($aboutId, $description)
     {
         $u = new About();

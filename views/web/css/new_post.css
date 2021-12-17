@@ -17,7 +17,7 @@
 }
 
 #post-form section label {
-  display: block; /*empuja a la siguiente linea */
+  display: block; 
   margin-bottom: 5px;
 }
 

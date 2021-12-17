@@ -1,11 +1,6 @@
 <?php
 class SessionHandle
 {
-    public function __construct()
-    {
-        // session_start();
-    }
-
     // Setting up session for login
     public function logged_in()
     {

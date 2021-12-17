@@ -5,6 +5,7 @@ $(document).ready(function () {
     //The AJAX call must specify contentType and psrocessdata otherwise it won't work.
     let formData = {
       option: "profile_form",
+      name: $("#name-profile").val(),
       email: $("#email-profile").val(),
       password: $("#password-profile").val(),
       password1: $("#password1-profile").val(),
@@ -21,6 +22,9 @@ $(document).ready(function () {
         console.log(data);
 
         if (!data.success) {
+          if (data.errors.name) {
+            $("#name-error").text(data.errors.name);
+          }
           if (data.errors.email) {
             $("#email-error").text(data.errors.email);
           }
@@ -93,6 +97,7 @@ $(document).ready(function () {
   }
 
   function resetErrorMessages() {
+    $("#name-error").text("");
     $("#email-error").text("");
     $("#avatar-error").text("");
     $("#password-error").text("");

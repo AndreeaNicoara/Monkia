@@ -64,8 +64,6 @@ class Comment
         $db = new DbConn();
         $date = date('Y-m-d H:i:s');
         $sql = 'UPDATE comment set description=? WHERE comment_id=?';
-        // VALUES ( :userId, :title, :categoryName, :mediaUrl, :descriptionInfo, :postdate, :upvote, :downvote)';
-        // VALUES ($userId, '$title', '$categoryName', '$mediaUrl', '$description', '$date', 0, 0)';
         $arr = [$description, $commentId];
 
         $result = $db->executeQueryBindArr($sql, $arr);

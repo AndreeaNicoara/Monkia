@@ -42,5 +42,4 @@ if (isset($_POST["pageName"])) {
             break;
     }
 
-    // echo $content;
 }

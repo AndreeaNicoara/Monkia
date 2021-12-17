@@ -3,8 +3,6 @@ $(document).ready(function () {
 
     var frontValidationOk = true;
     resetErrorMessages();
-    // $(document).on('click', '#new_post-submit-btn', function(e){
-    // e.preventDefault();
     //Files can be sent through AJAX using the FormData object.
     //The AJAX call must specify contentType and psrocessdata otherwise it won't work.
     let mydata = $("#new-post-form")[0];
@@ -71,8 +69,6 @@ $(document).ready(function () {
 
     var frontValidationOk = true;
     resetErrorMessages();
-    // $(document).on('click', '#new_post-submit-btn', function(e){
-    // e.preventDefault();
     //Files can be sent through AJAX using the FormData object.
     //The AJAX call must specify contentType and psrocessdata otherwise it won't work.
     let mydata = $("#edit-post-form")[0];

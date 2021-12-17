@@ -10,10 +10,9 @@ $c = new CategoryController();
 $categories = $c->loadCategories();
 
 // Load POST INFO
-// this data comed from the Page Controller
+// this data comes from the Page Controller
 $post_id = $data;
 $p = new PostController();
-// $post = $p->loadPostById($postID);
 $post = $p->loadPostById($post_id);
 ?>
 
@@ -53,10 +52,7 @@ $post = $p->loadPostById($post_id);
             <textarea type="text" name="description" id="description" value="<?php echo $post[0]['description'] ?>"><?php echo $post[0]['description'] ?></textarea>
             <span class="msg error-message-dark my-2" id="description-error">
           </div>
-          <!-- <div class="form-group">
-            <input type="file" name="imgfile" id="imgfile">
-            <span class="msg error-message-dark my-2" id="image-error">
-          </div> -->
+
           <input type="hidden" name="userId" id="userId" value="<?php echo $post[0]['post_id'] ?>">
           <div id="error-msg"></div>
           <button class="btn" type="button" id="new_post-submit-btn" onclick="submitEditPostForm()"> Update</button>

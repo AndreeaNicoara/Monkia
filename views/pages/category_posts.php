@@ -23,14 +23,7 @@ $categories = $c->loadCategories();
                 <?php echo $categoryName ?>
             </p>
         </div>
-        <!-- <div id="userfeed_filters_section" class="dropdown d-flex justify-content-end">
-            <select name="userfeed_filters" id="userfeed_filters" onchange="loadPosts(this.value, <?php echo $_SESSION['userId'] ?>);">
-                <option value="latest">Latest posts</option>
-                <option value="popular">Popular posts</option>
-                <option value="oldest">Oldest posts</option>
-                <option value="unpopular">Unpopular posts</option>
-            </select>
-        </div> -->
+        
         <div id="category-posts">
             <?php if ($categoryPosts) {
                 foreach ($categoryPosts as $post) { ?>

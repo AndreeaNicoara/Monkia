@@ -45,7 +45,7 @@ $userData = $u->getUserInfo();
                             <div class="col">
                               <div class="form-group">
                                 <label>Name</label>
-                                <input class="form-control" type="text" name="name" id="name-profile" placeholder="<?php echo $userData['name'] ?>" disabled>
+                                <input class="form-control" type="text" name="name" id="name-profile" placeholder="<?php echo $userData['name'] ?>">
                                 <span class="msg error-message my-2" id="name-error">
                               </div>
                             </div>

@@ -9,10 +9,6 @@ CREATE TABLE `role` (
     role_name VARCHAR (100) NOT NULL PRIMARY KEY
 )ENGINE = InnoDB;
 
-CREATE TABLE `tag` (
-    tag_name VARCHAR (100) NOT NULL PRIMARY KEY
-)ENGINE = InnoDB;
-
 CREATE TABLE `user` (
 	`user_id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   `name` VARCHAR(100) NULL,
@@ -66,14 +62,6 @@ CREATE TABLE `user_votes_post`(
   FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
 )ENGINE = InnoDB;
 
-CREATE TABLE `post_tag` (
-  post_id INT NOT NULL,
-  tag_name VARCHAR (100) NOT NULL,
-  CONSTRAINT PK_PostTag PRIMARY KEY (post_id,tag_name),
-  FOREIGN KEY (post_id) REFERENCES post (post_id),
-  FOREIGN KEY (tag_name) REFERENCES tag (tag_name)
-)ENGINE = InnoDB;
-
 CREATE TABLE `media` (
 	media_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   comment_id INT,
@@ -123,19 +111,6 @@ INSERT INTO `role` (role_name) VALUES ('guest');
 INSERT INTO `role` (role_name) VALUES ('registeredUser');
 INSERT INTO `role` (role_name) VALUES ('moderator');
 INSERT INTO `role` (role_name) VALUES ('admin') ;
-
-/* Tag */
-INSERT INTO `tag` (tag_name) VALUES ('Cristiano Ronaldo');
-INSERT INTO `tag` (tag_name) VALUES ('Angela Merkel');
-INSERT INTO `tag` (tag_name) VALUES ('White House');
-INSERT INTO `tag` (tag_name) VALUES ('Brexit') ;
-INSERT INTO `tag` (tag_name) VALUES ('Taylor Swift') ;
-INSERT INTO `tag` (tag_name) VALUES ('Kim Kardashian') ;
-INSERT INTO `tag` (tag_name) VALUES ('World Cup') ;
-INSERT INTO `tag` (tag_name) VALUES ('cats') ;
-INSERT INTO `tag` (tag_name) VALUES ('animals') ;
-INSERT INTO `tag` (tag_name) VALUES ('dogs') ;
-INSERT INTO `tag` (tag_name) VALUES ('memes') ;
 
 
 /* Category */

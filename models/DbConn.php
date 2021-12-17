@@ -8,8 +8,6 @@ class DbConn
 
     public function __construct()
     {
-
-        // $dsn = "mysql:host=".$this->servername."; dbname=".$this->dbname.";charset=".$this->charset.";
         $dsn = "mysql:host=" . DB_SERVER . ";dbname=" . DB_NAME . ";charset={$this->charset}";
 
         try {

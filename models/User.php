@@ -124,7 +124,6 @@ class User
     public function setUserCategories($userCategories)
     {
         $this->userCategories = $userCategories;
-        // $this->updateUserInfo('avatar', $userCategories);
 
     }
 
@@ -138,6 +137,12 @@ class User
     {
         $this->email = $email;
         $this->updateUserInfo('email', $email);
+    }
+
+    public function setName($name)
+    {
+        $this->name = $name;
+        $this->updateUserInfo('name', $name);
     }
 
      public function setActiveUser($status)

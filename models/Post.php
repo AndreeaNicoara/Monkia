@@ -64,8 +64,6 @@ class Post
     $date = date('Y-m-d H:i:s');
     $sql = 'INSERT INTO post (`user_id`, title, category_name, media_url, `description`, `datetime`)
             VALUES ( ?, ?, ?, ?, ?, ?)';
-    // VALUES ( :userId, :title, :categoryName, :mediaUrl, :descriptionInfo, :postdate, :upvote, :downvote)';
-    // VALUES ($userId, '$title', '$categoryName', '$mediaUrl', '$description', '$date', 0, 0)';
     $arr = [$userId, $title, $categoryName, $mediaUrl, $description, $date];
 
     $result = $db->executeQueryBindArr($sql, $arr);
@@ -77,8 +75,6 @@ class Post
     $db = new DbConn();
     $date = date('Y-m-d H:i:s');
     $sql = 'UPDATE post set title=?, description=? WHERE post_id=?';
-    // VALUES ( :userId, :title, :categoryName, :mediaUrl, :descriptionInfo, :postdate, :upvote, :downvote)';
-    // VALUES ($userId, '$title', '$categoryName', '$mediaUrl', '$description', '$date', 0, 0)';
     $arr = [$title, $description, $userId];
 
     $result = $db->executeQueryBindArr($sql, $arr);

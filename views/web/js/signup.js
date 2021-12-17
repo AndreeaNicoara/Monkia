@@ -5,11 +5,6 @@ function validate()
     // Reset error messages
     resetErrorMessages();
    
-
-    // var username = $('#username').val().replace(/\s/g, '');
-    // var email =$('#email').val().replace(/\s/g, '');
-    // var password =$('#password').val().replace(/\s/g, '');
-    // var password2 =$('#password2').val().replace(/\s/g, '');
     
     var username = $('#username').val();
     var email =$('#email').val();

@@ -5,10 +5,6 @@ spl_autoload_register(function ($class) {
         require $file;
     }
 });
-// spl_autoload_register(function ($class) {
-//     include "../models/" . $class . ".php";
-// });
-// include "bootstrapping.php";
 
 // Initializing Controller
 class PostController

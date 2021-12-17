@@ -5,9 +5,6 @@ $c = new CategoryController();
 $categories = $c->loadCategories();
 
 
-?>
-
-
 <div class="row d-flex justify-content-center min-vh-100">
 
   <div id="post-form" class="col col-lg-10">

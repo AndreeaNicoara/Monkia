@@ -1,16 +1,9 @@
 <?php
 
-// ----Requires----
-
 require_once('../bootstrapping.php');
-// include_once("PostController.php");
-// include_once("VoteController.php");
-// include_once("CommentController.php");
 
-// ----End of requires----
 
 // ----Declarations----
-
 // File size 
 define('KB', 1024);
 define('MB', 1048576);
@@ -19,7 +12,6 @@ define('TB', 1099511627776);
 
 $mediaPath = "../views/web/img/media/";
 $avatarPath = "../views/web/img/avatars/";
-
 // ----End of declarations----
 
 
@@ -55,8 +47,6 @@ if (isset($_POST["option"])) {
                 $imgFile = $_FILES['imgfile'];
                 $imgFileName = strtolower($_FILES['imgfile']['name']);
                 $imgFiltype = $imgFile['type'];
-                // $imgFileExtension = strtolower(pathinfo($imgFileName, PATHINFO_EXTENSION)); //returns file extension in lowercases
-                // $imgFileName = $imgFileName . '.' . $imgFileExtension;
 
                 // Image upload validation. Verify image file extension. 
                 if (($imgFiltype == "image/jpeg" ||
@@ -128,7 +118,7 @@ if (isset($_POST["option"])) {
             $data = [];
 
             if (!empty($_POST["password"])) {
-                $inputPassword =$_POST["password"];
+                $inputPassword = md5($_POST["password"]);
                 $u = new UserController();
                 if($inputPassword == $u->getUserPassword()){
 
@@ -137,10 +127,16 @@ if (isset($_POST["option"])) {
                         $u->setUser()->setUserEmail($email);
                     }
 
+                    if (!empty($_POST["name"])) {
+                        $name = $_POST["name"];
+                        $u->setUser()->setName($name);
+                    }
+
                     if (!empty($_POST["password1"]) && !empty($_POST["password2"])) {
                         $password1 = $_POST["password1"];
                         $password2 = $_POST["password2"];
                         if(($password1===$password2)){
+                            $password1 = md5($password1);
                             $u->setUser()->setUserPassword($password1);
                         } else {
                             $errors['password1'] = "The passwords don't match";

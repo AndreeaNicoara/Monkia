@@ -1,10 +1,8 @@
 <?php
-// require_once("../models/UserLogin.php");
-
 
 class LoginController
 {
-	// Function to Login User
+	// Function to Log in User
     public function loginUser($username, $password)
     {
         $u = new UserLogin();
